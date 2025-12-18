@@ -1,3 +1,4 @@
+import HomeFilter from "@/components/filters/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
@@ -6,10 +7,10 @@ import Link from "next/link";
 const questions = [
   {
     _id: "1",
-    title: "How to use Next.js with TypeScript?",
+    title: "How to use Next.js with JavaScript?",
     tags: [
       { _id: "1", name: "nextjs" },
-      { _id: "2", name: "typescript" },
+      { _id: "2", name: "javascript" },
     ],
     author: { _id: "1", name: "John Doe" },
     upvotes: 10,
@@ -37,11 +38,15 @@ interface SearchParams {
 }
 
 const Page = async ({ searchParams }: SearchParams) => {
-  const { query = "" } = await searchParams;
+  const { query = "", filter = "" } = await searchParams;
 
-  const filteredQuestions = questions.filter((question) =>
-    query ? question.title.toLowerCase().includes(query.toLowerCase()) : true
-  );
+  const filteredQuestions = questions.filter((question) => {
+    const matchesQuery = question.title.toLowerCase().includes(query.toLowerCase());
+
+    const matchesFilter = filter ? question.tags[0].name.toLowerCase() === filter.toLowerCase() : true;
+
+    return matchesQuery && matchesFilter;
+  });
 
   return (
     <>
@@ -55,6 +60,7 @@ const Page = async ({ searchParams }: SearchParams) => {
       <section className="mt-11">
         <LocalSearch route="/" imgSrc="/icons/search.svg" placeholder="Search questions..." otherClasses="flex-1" />
       </section>
+      <HomeFilter />
       <div className="mt-10 flex w-full flex-col gap-6">
         {filteredQuestions.map((question) => (
           <h1 key={question._id}> {question.title} </h1>
