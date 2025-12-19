@@ -1,3 +1,4 @@
+import QuestionCard from "@/components/cards/QuestionCard";
 import HomeFilter from "@/components/filters/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
@@ -12,7 +13,12 @@ const questions = [
       { _id: "1", name: "nextjs" },
       { _id: "2", name: "javascript" },
     ],
-    author: { _id: "1", name: "John Doe" },
+    author: {
+      _id: "1",
+      name: "John Doe",
+      image:
+        "https://img.freepik.com/premium-vector/young-man-avatar-character-due-avatar-man-vector-icon-cartoon-illustration_1186924-4438.jpg?semt=ais_hybrid&w=740&q=80",
+    },
     upvotes: 10,
     answers: 5,
     views: 100,
@@ -25,7 +31,12 @@ const questions = [
       { _id: "3", name: "react" },
       { _id: "4", name: "vue" },
     ],
-    author: { _id: "2", name: "Jane Smith" },
+    author: {
+      _id: "2",
+      name: "Jane Smith",
+      image:
+        "https://img.freepik.com/premium-vector/young-man-avatar-character-due-avatar-man-vector-icon-cartoon-illustration_1186924-4438.jpg?semt=ais_hybrid&w=740&q=80",
+    },
     upvotes: 20,
     answers: 8,
     views: 200,
@@ -63,7 +74,7 @@ const Page = async ({ searchParams }: SearchParams) => {
       <HomeFilter />
       <div className="mt-10 flex w-full flex-col gap-6">
         {filteredQuestions.map((question) => (
-          <h1 key={question._id}> {question.title} </h1>
+          <QuestionCard key={question._id} question={question} />
         ))}
       </div>
     </>
