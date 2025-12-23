@@ -1,6 +1,6 @@
 import { model, models, Schema } from "mongoose";
 
-interface IAccountSchema {
+export interface IAccount {
   userId: Schema.Types.ObjectId;
   name: string;
   image?: string;
@@ -9,7 +9,7 @@ interface IAccountSchema {
   providerAccountId: string;
 }
 
-const AccountSchema = new Schema<IAccountSchema>(
+const AccountSchema = new Schema<IAccount>(
   {
     userId: {
       type: Schema.Types.ObjectId,
@@ -38,6 +38,6 @@ const AccountSchema = new Schema<IAccountSchema>(
   }
 );
 
-const Account = (models?.Account as unknown as IAccountSchema) || model<IAccountSchema>("Account", AccountSchema);
+const Account = (models?.Account as unknown as IAccount) || model<IAccount>("Account", AccountSchema);
 
 export default Account;
