@@ -3,7 +3,9 @@ import HomeFilter from "@/components/filters/HomeFilter";
 import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 import ROUTES from "@/constants/routes";
-import { filter } from "@mdxeditor/editor";
+import handleError from "@/lib/handlers/error";
+import { NotFoundError, ValidationError } from "@/lib/http-errors";
+import dbConnect from "@/lib/mongoose";
 import Link from "next/link";
 
 const questions = [
@@ -45,11 +47,21 @@ const questions = [
   },
 ];
 
+const test = async () => {
+  try {
+    throw new Error("AAA");
+  } catch (error) {
+    return handleError(error);
+  }
+};
+
 interface SearchParams {
   searchParams: Promise<{ [key: string]: string }>;
 }
 
 const Page = async ({ searchParams }: SearchParams) => {
+  const result = await test();
+  console.log("DUPA", result);
   const { query = "", filter = "" } = await searchParams;
 
   const filteredQuestions = questions.filter((question) => {
