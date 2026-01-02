@@ -1,7 +1,8 @@
 "use client";
 
 import { AuthForm } from "@/components/forms/AuthForm";
-import { SignInSchema, SignUpSchema } from "@/lib/validations";
+import { signUpWithCredentials } from "@/lib/actions/auth.action";
+import { SignUpSchema } from "@/lib/validations";
 
 const Signup = () => {
   return (
@@ -14,12 +15,7 @@ const Signup = () => {
         name: "",
         username: "",
       }}
-      onSubmit={(data) => {
-        Promise.resolve({
-          success: true,
-          data,
-        });
-      }}
+      onSubmit={signUpWithCredentials}
     />
   );
 };
