@@ -8,10 +8,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Fragment } from "react/jsx-runtime";
 
-const NavLinks = ({ isMobileNav = false }: { isMobileNav?: boolean }) => {
+const NavLinks = ({ isMobileNav = false, userId }: { isMobileNav?: boolean; userId?: string }) => {
   const pathname = usePathname();
-
-  const userId = 1;
 
   return (
     <>
