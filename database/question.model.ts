@@ -1,6 +1,6 @@
 import { Document, model, models, Schema } from "mongoose";
 
-interface IQuestion {
+export interface IQuestion {
   title: string;
   content: string;
   author: Schema.Types.ObjectId;
@@ -39,6 +39,6 @@ const QuestionSchema = new Schema<IQuestion>(
   }
 );
 
-const Question = (models?.Question as unknown as IQuestion) || model<IQuestion>("Question", QuestionSchema);
+const Question = models?.Question || model<IQuestion>("Question", QuestionSchema);
 
 export default Question;

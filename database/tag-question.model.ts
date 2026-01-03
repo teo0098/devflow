@@ -25,7 +25,6 @@ const TagQuestionSchema = new Schema<ITagQuestion>(
   }
 );
 
-const TagQuestion =
-  (models?.TagQuestion as unknown as ITagQuestion) || model<ITagQuestion>("TagQuestion", TagQuestionSchema);
+const TagQuestion = models?.TagQuestion || model<ITagQuestion>("TagQuestion", TagQuestionSchema);
 
 export default TagQuestion;

@@ -24,6 +24,6 @@ const TagSchema = new Schema<ITag>(
   }
 );
 
-const Tag = (models?.Tag as unknown as ITag) || model<ITag>("Tag", TagSchema);
+const Tag = models?.Tag || model<ITag>("Tag", TagSchema);
 
 export default Tag;

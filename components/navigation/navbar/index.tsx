@@ -24,7 +24,7 @@ const Navbar = async () => {
         <Theme />
 
         {session?.user?.id && (
-          <UserAvatar id={session.user.id} name={session.user.name} imageUrl={session.user.image} />
+          <UserAvatar id={session.user.id} name={session.user.name!} imageUrl={session.user.image} />
         )}
 
         <MobileNavigation />
