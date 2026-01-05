@@ -4,8 +4,12 @@ const ROUTES = {
   SIGN_UP: "/sign-up",
   ASK_QUESTION: "/ask-question",
   PROFILE: (id: string) => `/profile/${id}`,
-  TAGS: (id: string) => `/tags/${id}`,
+  TAG: (id: string) => `/tags/${id}`,
   QUESTION: (id: string) => `/questions/${id}`,
+  COLLECTION: "/collection",
+  COMMUNITY: "/community",
+  TAGS: "/tags",
+  JOBS: "/jobs",
 };
 
 export default ROUTES;

@@ -16,7 +16,16 @@ interface Props {
   handleRemove?: () => void;
 }
 
-const TagCard = ({ _id, name, questions, showCount, compact, handleRemove, isButton, remove }: Props) => {
+const TagCard = ({
+  _id,
+  name,
+  questions,
+  showCount,
+  compact,
+  handleRemove,
+  isButton,
+  remove,
+}: Props) => {
   const Content = (
     <>
       <Badge className="subtle-medium background-light800_dark300 text-light400_light500 flex flex-row gap-2 rounded-md border-none px-4 py-2 uppercase">
@@ -37,17 +46,22 @@ const TagCard = ({ _id, name, questions, showCount, compact, handleRemove, isBut
         )}
       </Badge>
 
-      {showCount && <p className="small-medium text-dark500_light700"> {questions} </p>}
+      {showCount && (
+        <p className="small-medium text-dark500_light700"> {questions} </p>
+      )}
     </>
   );
 
   if (compact) {
     return isButton ? (
-      <Button type="button" className="flex justify-between gap-2 bg-transparent">
+      <Button
+        type="button"
+        className="flex justify-between gap-2 bg-transparent"
+      >
         {Content}
       </Button>
     ) : (
-      <Link href={ROUTES.TAGS(_id)} className="flex justify-between gap-2">
+      <Link href={ROUTES.TAG(_id)} className="flex justify-between gap-2">
         {Content}
       </Link>
     );
