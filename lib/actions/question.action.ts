@@ -201,7 +201,7 @@ export async function editQuestion(
 
 export async function getQuestion(
   params: GetQuestionParams
-): Promise<ActionResponse<IQuestionDoc>> {
+): Promise<ActionResponse<typeof Question>> {
   const validationResult = await action({
     params,
     schema: GetQuestionSchema,
@@ -215,16 +215,18 @@ export async function getQuestion(
   const { questionId } = validationResult.params!;
 
   try {
-    const question = await Question.findById(questionId).populate("tags");
+    const question = await Question.findById(questionId)
+      .populate("tags")
+      .populate("author", "_id name image");
 
     if (!question) {
       throw new Error("Question not found");
     }
 
     return {
+      status: 200,
       success: true,
       data: JSON.parse(JSON.stringify(question)),
-      status: 200,
     };
   } catch (error) {
     return handleError(error) as ErrorResponse;
