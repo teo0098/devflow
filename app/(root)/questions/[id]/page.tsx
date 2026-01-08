@@ -13,6 +13,7 @@ import { RouteParams, Tag } from "@/types/global";
 import Metric from "@/components/ui/Metric";
 import AllAnswers from "@/components/answers/AllAnswers";
 import UserAvatar from "@/components/ui/UserAvatar";
+import Votes from "@/components/votes/Votes";
 
 const QuestionDetails = async ({ params }: RouteParams) => {
   const { id } = await params;
@@ -56,7 +57,12 @@ const QuestionDetails = async ({ params }: RouteParams) => {
           </div>
 
           <div className="flex justify-end">
-            <p>Votes</p>
+            <Votes
+              upvotes={question.upvotes}
+              hasupVoted={true}
+              downvotes={question.downvotes}
+              hasdownVoted={false}
+            />
           </div>
         </div>
 

@@ -17,6 +17,7 @@ interface Question {
   content: string;
   tags: Tag[];
   author: Author;
+  downvotes: number;
   createdAt: Date;
   upvotes: number;
   answers: number;
