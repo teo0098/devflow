@@ -33,6 +33,6 @@ const VoteSchema = new Schema<IVote>(
   }
 );
 
-const Vote = (models?.Vote as unknown as IVote) || model<IVote>("Vote", VoteSchema);
+const Vote = models?.Vote || model<IVote>("Vote", VoteSchema);
 
 export default Vote;
