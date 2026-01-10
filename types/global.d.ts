@@ -1,5 +1,3 @@
-import { NextResponse } from "next/server";
-
 interface Tag {
   _id: string;
   name: string;
@@ -17,11 +15,12 @@ interface Question {
   content: string;
   tags: Tag[];
   author: Author;
-  downvotes: number;
   createdAt: Date;
   upvotes: number;
+  downvotes: number;
   answers: number;
   views: number;
+  createdAt: Date;
 }
 
 type ActionResponse<T = null> = {
@@ -31,7 +30,7 @@ type ActionResponse<T = null> = {
     message: string;
     details?: Record<string, string[]>;
   };
-  status: number;
+  status?: number;
 };
 
 type SuccessResponse<T = null> = ActionResponse<T> & { success: true };
@@ -42,7 +41,7 @@ type APIResponse<T = null> = NextResponse<SuccessResponse<T> | ErrorResponse>;
 
 interface RouteParams {
   params: Promise<Record<string, string>>;
-  searchParams: Promsie<Record<string, string>>;
+  searchParams: Promise<Record<string, string>>;
 }
 
 interface PaginatedSearchParams {
@@ -58,4 +57,6 @@ interface Answer {
   author: Author;
   content: string;
   createdAt: Date;
+  upvotes: number;
+  downvotes: number;
 }

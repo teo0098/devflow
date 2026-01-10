@@ -46,7 +46,7 @@ export async function updateVoteCount(
         new Error("Failed to update vote count")
       ) as ErrorResponse;
 
-    return { success: true, status: 201 };
+    return { success: true, status: 200 };
   } catch (error) {
     return handleError(error) as ErrorResponse;
   }
@@ -68,7 +68,7 @@ export async function createVote(
   const { targetId, targetType, voteType } = validationResult.params!;
   const userId = validationResult.session?.user?.id;
 
-  if (!userId) handleError(new Error("Unauthorized")) as ErrorResponse;
+  if (!userId) return handleError(new Error("Unauthorized")) as ErrorResponse;
 
   const session = await mongoose.startSession();
   session.startTransaction();
@@ -96,6 +96,10 @@ export async function createVote(
           { new: true, session }
         );
         await updateVoteCount(
+          { targetId, targetType, voteType: existingVote.voteType, change: -1 },
+          session
+        );
+        await updateVoteCount(
           { targetId, targetType, voteType, change: 1 },
           session
         );
@@ -109,7 +113,6 @@ export async function createVote(
             actionId: targetId,
             actionType: targetType,
             voteType,
-            change: 1,
           },
         ],
         {
