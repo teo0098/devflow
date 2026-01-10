@@ -9,13 +9,13 @@ import ROUTES from "@/constants/routes";
 import { getAnswers } from "@/lib/actions/answer.action";
 import { getQuestion, incrementViews } from "@/lib/actions/question.action";
 import { formatNumber, getTimeStamp } from "@/lib/utils";
-import { RouteParams, Tag } from "@/types/global";
 import Metric from "@/components/ui/Metric";
 import AllAnswers from "@/components/answers/AllAnswers";
 import UserAvatar from "@/components/ui/UserAvatar";
 import Votes from "@/components/votes/Votes";
 import { hasVoted } from "@/lib/actions/vote.action";
 import { Suspense } from "react";
+import SaveQuestion from "@/components/questions/SaveQuestion";
 
 const QuestionDetails = async ({ params }: RouteParams) => {
   const { id } = await params;
@@ -66,12 +66,16 @@ const QuestionDetails = async ({ params }: RouteParams) => {
           <div className="flex justify-end">
             <Suspense fallback={<div>Loading...</div>}>
               <Votes
+                targetType="question"
                 upvotes={question.upvotes}
                 downvotes={question.downvotes}
-                targetType="question"
                 targetId={question._id}
                 hasVotedPromise={hasVotedPromise}
               />
+            </Suspense>
+
+            <Suspense fallback={<div>Loading...</div>}>
+              <SaveQuestion questionId={question._id} />
             </Suspense>
           </div>
         </div>
@@ -128,7 +132,11 @@ const QuestionDetails = async ({ params }: RouteParams) => {
       </section>
 
       <section className="my-5">
-        <AnswerForm questionId={question._id} />
+        <AnswerForm
+          questionId={question._id}
+          questionTitle={question.title}
+          questionContent={question.content}
+        />
       </section>
     </>
   );
