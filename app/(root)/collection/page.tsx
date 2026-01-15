@@ -8,6 +8,8 @@ import { EMPTY_COLLECTIONS } from "@/constants/states";
 import { getSavedQuestions } from "@/lib/actions/collection.action";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
+import CommonFilter from "@/components/filters/CommonFilter";
+import { CollectionFilters } from "@/constants/filters";
 
 const CollectionPage = async ({ searchParams }: RouteParams) => {
   const { page, pageSize, query, filter } = await searchParams;
@@ -40,10 +42,10 @@ const CollectionPage = async ({ searchParams }: RouteParams) => {
           otherClasses="flex-1"
         />
 
-        {/* <CommonFilter
+        <CommonFilter
           filters={CollectionFilters}
           otherClasses="min-h-[56px] sm:min-w-[170px]"
-        /> */}
+        />
       </div>
 
       <DataRenderer
